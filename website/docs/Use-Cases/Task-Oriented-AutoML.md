@@ -208,18 +208,18 @@ from flaml.automl.model import XGBoostEstimator
 
 
 def logregobj(preds, dtrain):
-  labels = dtrain.get_label()
-  preds = 1.0 / (1.0 + np.exp(-preds))  # transform raw leaf weight
-  grad = preds - labels
-  hess = preds * (1.0 - preds)
-  return grad, hess
+    labels = dtrain.get_label()
+    preds = 1.0 / (1.0 + np.exp(-preds))  # transform raw leaf weight
+    grad = preds - labels
+    hess = preds * (1.0 - preds)
+    return grad, hess
 
 
 class MyXGB1(XGBoostEstimator):
   """XGBoostEstimator with logregobj as the objective function"""
 
-  def __init__(self, **config):
-    super().__init__(objective=logregobj, **config)
+    def __init__(self, **config):
+        super().__init__(objective=logregobj, **config)
 ```
 
 We override the constructor and set the training objective as a custom function `logregobj`. The hyperparameters and their search range do not change. For another example,
